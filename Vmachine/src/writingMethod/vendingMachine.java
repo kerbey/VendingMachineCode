@@ -1,9 +1,9 @@
 /*First the program enters in the Cost method where it tells the user to enter in the amount of 1 dollar bills, five dollar bills
  , and the amount of change (20 for 20 cents). The money is added then the user can enter in 2 to continue and 0 to cancel and end the program. If it continues the program returns to the main 
- method and the user is given a list of products with their prices to choose from or can enter in 0 to cancel and get change back
-. The user chooses and is once again given the option to enter 1( keep choosing products and add on to the previously chosen
+ method and the user is given a list of products with their prices to choose from or can enter in 0 to cancel.
+ The user chooses and is once again given the option to enter 1( keep choosing products and add on to the previously chosen
   product), 2 (get change and finish), 0 (cancel the purchase). Once 2 is chosen it subtracts the product(s) price(s) and
- gives you change in quarters, dimes, nickels, and/or pennies.
+ gives you change in quarters, dimes, nickels, and/or pennies. If you don't have enough the program will say so and then end.
  * */
 package writingMethod;
 import java.util.Scanner;
@@ -11,66 +11,76 @@ public class vendingMachine
 {
 	public static void main(String[] args)
 	{
-		int total4=0;
 		int finalTotal=0;
-		int input2=1;
-		int finaltotal2=0;
-		int product=1;
-		Scanner keyboard = new Scanner(System.in); 
-		if (product!=0)
+		int purchase=0;
+		finalTotal = Cost();
+		purchase(purchase, finalTotal);
+	}
+	private static void purchase(int purchase, int finalTotal)
+	{
+		int input2=1, total4=0;
+		if (input2==1)
 		{
-			finalTotal = Cost();
-			if (input2==1)
+			Scanner keyboard = new Scanner(System.in); 
+			System.out.println("Choose what you want to buy");
+			System.out.println(" a. deoderant($1.25), b.running sneakers($2.50),");
+			System.out.println(" c.mountain dew($4.25), d.socks($5.45), e.T-shirt($6.00), or 0 to cancel");
+			String choice=keyboard.next();
+			if(choice.contains("a"))
 			{
-				System.out.println("Choose what you want to buy");
-				System.out.println(" a. deoderant($1.25), b.running sneakers($2.50),");
-				System.out.println(" c.mountain dew($4.25), d.socks($5.45), e.T-shirt($6.00), or 0 to cancel");
-				String choice=keyboard.next();
-				if(choice.contains("a"))
-				{
-					total4= 125;
-				}
-				else if (choice.contains("b"))
-				{
-					total4= 250;
-				}
-				else if (choice.contains("c"))
-				{
-					total4= 425;
-				}
-				else if (choice.contains("d"))
-				{
-					total4= 545;
-				}
-				else if (choice.contains("e"))
-				{
-					total4= 600;
-				}
-				else if (choice.contains("0"))
-				{
-					System.out.println("you got your "+finalTotal+" cents back");
-					end();
-				}
-				finaltotal2=finaltotal2+total4;
-				System.out.println("you're spending "+(finaltotal2)+" cents");
-				System.out.println("do you want to keep spending money?");
-				System.out.println("enter 1 for yes 2 for no and 0 to cancel");
-				input2=keyboard.nextInt();
-				if (input2==0)
-				{
-					System.out.println("end");
-					end();	
-				}
+				total4= 125;
+				purchase=purchase+total4;
 			}
-			if((finaltotal2-finalTotal)<0)
+			else if (choice.contains("b"))
 			{
-				System.out.println("your change is "+(finalTotal-finaltotal2)+" cents");
-				vendingMachine(finalTotal-finaltotal2);
+				total4= 250;
+				purchase=purchase+total4;
 			}
-			else 
+			else if (choice.contains("c"))
 			{
-				System.out.println(" you don't have enough money");
+				total4= 425;
+				purchase=purchase+total4;
 			}
+			else if (choice.contains("d"))
+			{
+				total4= 545;
+				purchase=purchase+total4;
+			}
+			else if (choice.contains("e"))
+			{
+				total4= 600;
+				purchase=purchase+total4;
+			}
+			else if (choice.contains("0"))
+			{
+				System.out.println("you got your money back");
+				end();
+			}
+			System.out.println("you're spending "+(purchase)+" cents");
+			System.out.println("do you want to keep spending money?");
+			System.out.println("enter 1 for yes 2 for no and 0 to cancel");
+			input2=keyboard.nextInt();
+			if (input2==0)
+			{
+				System.out.println("you got your "+finalTotal+" cents back");
+				end();	
+			}
+			else if(input2==1)
+			{
+				purchase(purchase, finalTotal);
+			}
+		}
+		
+		if((finalTotal-(purchase))>=0)
+		{
+			System.out.println("your change is "+(finalTotal-purchase)+" cents");
+			vendingMachine(finalTotal-purchase);
+		}
+		else /*if((finalTotal-purchase)<0)*/
+		{
+			System.out.println("you're spending "+purchase);
+			System.out.println(" you don't have enough money");
+			end();
 		}
 	}
 	public static void start()
