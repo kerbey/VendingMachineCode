@@ -83,10 +83,6 @@ public class vendingMachine
 			end();
 		}
 	}
-	public static void start()
-	{
-		main(null);
-	}
 	private static void end() 
 	{
 		System.exit(0);
