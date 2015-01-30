@@ -56,11 +56,11 @@ public class vendingMachine
 				System.out.println("you got your money back");
 				end();
 			}
-			System.out.println("you're spending "+(purchase)+" cents");
+		        System.out.println("you're spending "+(purchase)+" cents");
 			System.out.println("do you want to keep spending money?");
-			System.out.println("enter 1 for yes 2 for no and 0 to cancel");
+			System.out.println("enter 1 for yes 0 for no and 2 to cancel");
 			input2=keyboard.nextInt();
-			if (input2==0)
+			if (input2==2)
 			{
 				System.out.println("you got your "+finalTotal+" cents back");
 				end();	
@@ -78,7 +78,7 @@ public class vendingMachine
 		}
 		else /*if((finalTotal-purchase)<0)*/
 		{
-			System.out.println("you're spending "+purchase);
+			System.out.println("you're spending "+purchase+" cents");
 			System.out.println(" you don't have enough money");
 			end();
 		}
