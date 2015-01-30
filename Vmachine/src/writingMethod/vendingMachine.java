@@ -1,3 +1,10 @@
+/*First the program enters in the Cost method where it tells the user to enter in the amount of 1 dollar bills, five dollar bills
+ , and the amount of change (20 for 20 cents). The money is added then the user can enter in 2 to continue and 0 to cancel and end the program. If it continues the program returns to the main 
+ method and the user is given a list of products with their prices to choose from or can enter in 0 to cancel and get change back
+. The user chooses and is once again given the option to enter 1( keep choosing products and add on to the previously chosen
+  product), 2 (get change and finish), 0 (cancel the purchase). Once 2 is chosen it subtracts the product(s) price(s) and
+ gives you change in quarters, dimes, nickels, and/or pennies.
+ * */
 package writingMethod;
 import java.util.Scanner;
 public class vendingMachine
@@ -12,12 +19,12 @@ public class vendingMachine
 		Scanner keyboard = new Scanner(System.in); 
 		if (product!=0)
 		{
-			finalTotal = Cost();//goes to cost method to collect amount user wants to spend
+			finalTotal = Cost();
 			if (input2==1)
-			{//user chooses which product to purchase
+			{
 				System.out.println("Choose what you want to buy");
 				System.out.println(" a. deoderant($1.25), b.running sneakers($2.50),");
-				System.out.println(" c.mountain dew($4.25), d.socks($5.45), e.T-shirt($6.00)");
+				System.out.println(" c.mountain dew($4.25), d.socks($5.45), e.T-shirt($6.00), or 0 to cancel");
 				String choice=keyboard.next();
 				if(choice.contains("a"))
 				{
@@ -39,22 +46,26 @@ public class vendingMachine
 				{
 					total4= 600;
 				}
+				else if (choice.contains("0"))
+				{
+					System.out.println("you got your "+finalTotal+" cents back");
+					end();
+				}
 				finaltotal2=finaltotal2+total4;
 				System.out.println("you're spending "+(finaltotal2)+" cents");
-                //user can continue purchasing, cancel the whole thing, or receive change
 				System.out.println("do you want to keep spending money?");
 				System.out.println("enter 1 for yes 2 for no and 0 to cancel");
 				input2=keyboard.nextInt();
 				if (input2==0)
 				{
 					System.out.println("end");
-					end();//goes to end method to end the program	
+					end();	
 				}
 			}
 			if((finaltotal2-finalTotal)<0)
 			{
 				System.out.println("your change is "+(finalTotal-finaltotal2)+" cents");
-				vendingMachine(finalTotal-finaltotal2);//change is given here
+				vendingMachine(finalTotal-finaltotal2);
 			}
 			else 
 			{
@@ -76,7 +87,7 @@ public class vendingMachine
 		int finalTotal=0;
 		Scanner keyboard = new Scanner(System.in); 
 		if (input==1)
-		{//user enters the amount of 1 dollar bills, then fives, then the amount of change (20 for 20 cents)
+		{
 			System.out.println("enter the amount of one and five dollar bills and amount of change you wish to spend?");
 			number = keyboard.nextInt();
 			int amount=number*100;
@@ -91,8 +102,8 @@ public class vendingMachine
 
 			finalTotal=total+total2+total3;
 			System.out.println("your item is worth "+finalTotal+" cents");
-			System.out.println("do you want to keep adding money?");
-			System.out.println("enter 1 for yes and 2 for no and 0 to cancel.");
+			System.out.println("do you want to keep going or cancel?");
+			System.out.println("enter 2 to keep going and 0 to cancel.");
 			input=keyboard.nextInt();
 			if (input==0)
 			{
@@ -102,7 +113,7 @@ public class vendingMachine
 		return finalTotal;
 	}
 	private static void vendingMachine(int amount)
-	{//algorithm to get any amount of money in change
+	{
 		int originalAmount,quarters, dimes, nickels, pennies; 
 		originalAmount = amount;       
 		quarters = amount / 25;     
